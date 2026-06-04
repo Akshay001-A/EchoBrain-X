@@ -7,22 +7,47 @@ const genAI = new GoogleGenerativeAI(
 );
 
 const askGemini = async (prompt) => {
-    try {
-        const model =
-            genAI.getGenerativeModel({
-                model: "gemini-2.5-flash",
-            });
 
-        const result =
-            await model.generateContent(prompt);
+    for (let i = 0; i < 3; i++) {
 
-        return result.response.text();
-    } catch (error) {
-        console.error(
-            "Gemini Error:",
-            error.message
-        );
-        throw error;
+        try {
+
+            const model =
+                genAI.getGenerativeModel({
+                    model: "gemini-1.5-flash",
+                });
+
+            const result =
+                await model.generateContent(
+                    prompt
+                );
+
+            return result.response.text();
+
+        } catch (error) {
+
+            if (
+                error.status === 503 &&
+                i < 2
+            ) {
+
+                console.log(
+                    `Retry ${i + 1}...`
+                );
+
+                await new Promise(
+                    resolve =>
+                        setTimeout(
+                            resolve,
+                            3000
+                        )
+                );
+
+                continue;
+            }
+
+            throw error;
+        }
     }
 };
 
