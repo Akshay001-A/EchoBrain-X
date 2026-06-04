@@ -1,6 +1,9 @@
 const Project = require("../models/Project");
 const Snippet = require("../models/Snippet");
 
+const generateEmbedding =
+    require("../utils/generateEmbedding");
+
 const fs = require("fs");
 const path = require("path");
 
@@ -43,18 +46,38 @@ const uploadProject = async (req, res) => {
 
             const chunks = chunkCode(content);
 
-            for (let i = 0; i < chunks.length; i++) {
+            for (
+                let i = 0;
+                i < chunks.length;
+                i++
+            ) {
+                console.log(
+                    "Generating embedding..."
+                );
+
+                const embedding =
+                    await generateEmbedding(
+                        chunks[i]
+                    );
+
+                console.log(
+                    "Embedding Size:",
+                    embedding.length
+                );
 
                 await Snippet.create({
                     userId: req.user.id,
                     projectId: project._id,
-                    filePath: relativePath,
+                    filePath,
                     language: "unknown",
                     chunkIndex: i,
                     code: chunks[i],
+                    embedding,
                 });
 
                 totalChunks++;
+
+                console.log("FILE SAVED");
             }
         }
 
