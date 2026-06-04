@@ -12,3 +12,11 @@ node_modules/
 
 # Logs
 *.log
+
+# Uploads
+uploads/
+uploads/*
+uploads/extracted/
+
+# Keep folder structure
+!uploads/.gitkeep
