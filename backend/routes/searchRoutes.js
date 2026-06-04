@@ -4,13 +4,13 @@ const router = express.Router();
 const protect = require("../middleware/authMiddleware");
 
 const {
-  searchSnippets,
+    searchSnippets,
 } = require("../controllers/searchController");
 
 router.post(
-  "/",
-  protect,
-  searchSnippets
+    "/",
+    protect,
+    searchSnippets
 );
 
 module.exports = router;
