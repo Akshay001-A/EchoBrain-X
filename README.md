@@ -1,200 +1,274 @@
+<div align="center">
+
 # 🧠 EchoBrain X
 
-AI-Powered Code Understanding Platform that allows developers to upload repositories and instantly explore, analyze, summarize, and chat with their codebase using AI.
+### AI-Powered Code Understanding Platform
+
+Upload repositories, analyze architecture, chat with your codebase, generate summaries, and understand projects instantly using AI.
+
+![GitHub stars](https://img.shields.io/github/stars/Akshay001-A/EchoBrain?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/Akshay001-A/EchoBrain?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/Akshay001-A/EchoBrain?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+</div>
 
 ---
 
-## 🚀 Overview
+# 🚀 Overview
 
-EchoBrain X helps developers understand unfamiliar projects faster by automatically extracting source code snippets, generating embeddings, and using AI to provide:
+EchoBrain X is an AI-powered repository intelligence platform designed to help developers understand unfamiliar projects faster.
 
-- Project Summaries
-- Code Flow Analysis
-- AI Code Chat
-- Source Code Viewing
-- Semantic Code Search
+Instead of manually exploring hundreds of files, users can upload a repository and instantly:
 
-Instead of manually reading hundreds of files, developers can ask questions in plain English and receive intelligent explanations.
+✅ Generate project summaries
 
----
+✅ Chat with code using AI
 
-## ✨ Features
+✅ Analyze architecture and execution flow
 
-### 📂 Repository Upload
+✅ Perform semantic code search
 
-Upload any ZIP repository and automatically:
+✅ Browse source files visually
 
-- Extract source files
-- Parse code
-- Generate embeddings
-- Store snippets in MongoDB
+✅ Understand APIs and modules
 
 ---
 
-### 🤖 AI Code Chat
+# ✨ Core Features
 
-Ask questions like:
+## 📂 Repository Upload & Processing
+
+Upload any project repository as a ZIP file.
+
+EchoBrain automatically:
+
+- Extracts source code
+- Parses project structure
+- Generates vector embeddings
+- Stores searchable code snippets
+- Builds AI-ready project context
+
+---
+
+## 🤖 AI Code Chat
+
+Ask questions in plain English:
 
 ```text
-How does login work?
+How does authentication work?
+
 Which file handles products?
-Explain authentication flow.
+
+Explain the user registration flow.
+
+Where is JWT implemented?
 ```
 
-EchoBrain X:
+The platform:
 
-- Finds relevant snippets
-- Uses vector similarity search
-- Sends context to Gemini AI
-- Returns human-friendly explanations
+1. Retrieves relevant code snippets
+2. Performs semantic similarity search
+3. Sends contextual information to Gemini AI
+4. Returns detailed explanations
 
 ---
 
-### 📄 Project Summary
+## 📄 AI Project Summary
 
-Generate complete project summaries including:
+Generate comprehensive summaries including:
 
-- Purpose
-- Architecture
+- Project Purpose
+- Architecture Overview
 - Tech Stack
-- Main Modules
-- API Endpoints
+- Main Features
+- APIs
 - Database Models
-- Features
-
----
-
-### 🔄 Flow Analysis
-
-Understand execution flow:
-
-```text
-User Action
-      ↓
-Frontend
-      ↓
-API Route
-      ↓
-Controller
-      ↓
-Database
-      ↓
-Response
-```
+- Folder Structure
 
 Perfect for:
 
-- Interviews
-- Learning projects
-- Understanding legacy code
+- Learning new projects
+- Team onboarding
+- Interview preparation
 
 ---
 
-### 📑 Source Code Viewer
+## 🔄 Architecture & Flow Analysis
 
-Browse uploaded repositories directly inside EchoBrain X.
-
-Features:
-
-- Project selector
-- File explorer
-- Search files
-- Code viewer
-- Fast navigation
-
----
-
-## 🏗 System Architecture
+Understand complete application workflows.
 
 ```text
 User
  ↓
-Frontend (Next.js)
+Frontend
  ↓
-Backend API (Node.js + Express)
+API Route
  ↓
-MongoDB
+Controller
  ↓
-Embeddings
+Database
  ↓
-Gemini AI
+Response
+```
+
+Useful for:
+
+- Legacy codebases
+- Enterprise projects
+- System design understanding
+
+---
+
+## 🔍 Semantic Code Search
+
+Search code using natural language.
+
+Example:
+
+```text
+Find payment logic
+
+Show JWT implementation
+
+Where are products created?
+```
+
+Instead of keyword matching, EchoBrain understands code meaning.
+
+---
+
+## 📑 Source Code Viewer
+
+Built-in repository explorer featuring:
+
+- Project Navigator
+- Folder Explorer
+- File Search
+- Syntax Highlighting
+- Quick Navigation
+
+No need to open external IDEs.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                ┌──────────────┐
+                │    User      │
+                └──────┬───────┘
+                       │
+                       ▼
+            ┌─────────────────────┐
+            │   Next.js Frontend  │
+            └─────────┬───────────┘
+                      │
+                      ▼
+            ┌─────────────────────┐
+            │ Express.js Backend  │
+            └─────────┬───────────┘
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+
+    MongoDB Storage       Embedding Engine
+                                  │
+                                  ▼
+
+                          Gemini AI Model
 ```
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 - Next.js
 - React.js
+- Tailwind CSS
 - Axios
 - Framer Motion
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
 
-### Database
+## Database
 
 - MongoDB
 - Mongoose
 
-### AI & ML
+## Artificial Intelligence
 
 - Google Gemini
 - Xenova Transformers
 - Vector Embeddings
-- Cosine Similarity Search
+- Semantic Search
+- Cosine Similarity
 
-### Authentication
+## Authentication
 
 - JWT Authentication
 
 ---
 
-## 📸 Screenshots
+# 📸 Screenshots
 
-### Dashboard
+> Ensure a `screenshots` folder exists in the root repository.
 
-![Dashboard](screenshots/dashboard.png)
+## 📸 Dashboard
 
----
-
-### Upload Repository
-
-![Upload](screenshots/upload.png)
+<p align="center">
+  <img src="frontend/public/screenshots/dashboard.png" width="900">
+</p>
 
 ---
 
-### AI Chat
+## 📸 Repository Upload
 
-![Chat](screenshots/chat.png)
-
----
-
-### Project Summary
-
-![Summary](screenshots/summary.png)
+<p align="center">
+  <img src="frontend/public/screenshots/upload.png" width="900">
+</p>
 
 ---
 
-### Source Code Viewer
+## 📸 AI Chat
 
-![Viewer](screenshots/viewer.png)
+<p align="center">
+  <img src="frontend/public/screenshots/chat.png" width="900">
+</p>
 
 ---
 
-## 📁 Project Structure
+## 📸 Project Summary
+
+<p align="center">
+  <img src="frontend/public/screenshots/summary.png" width="900">
+</p>
+
+---
+
+## 📸 Source Code Viewer
+
+<p align="center">
+  <img src="frontend/public/screenshots/viewer.png" width="900">
+</p>
+
+---
+
+# 📂 Project Structure
 
 ```text
-EchoBrain-X
+EchoBrain
 │
 ├── frontend
 │   ├── app
 │   ├── components
 │   ├── services
+│   ├── hooks
 │   └── public
 │
 ├── backend
@@ -203,6 +277,7 @@ EchoBrain-X
 │   ├── models
 │   ├── middleware
 │   ├── utils
+│   ├── services
 │   └── uploads
 │
 └── README.md
@@ -210,18 +285,19 @@ EchoBrain-X
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/echobrain-x.git
-cd echobrain-x
+git clone https://github.com/Akshay001-A/EchoBrain.git
+
+cd EchoBrain
 ```
 
 ---
 
-### Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
@@ -231,9 +307,15 @@ npm install
 npm run dev
 ```
 
+Backend runs on:
+
+```text
+http://localhost:5000
+```
+
 ---
 
-### Frontend Setup
+## Frontend Setup
 
 ```bash
 cd frontend
@@ -243,9 +325,15 @@ npm install
 npm run dev
 ```
 
+Frontend runs on:
+
+```text
+http://localhost:3000
+```
+
 ---
 
-## Environment Variables
+# 🔑 Environment Variables
 
 Create:
 
@@ -256,71 +344,89 @@ backend/.env
 ```env
 PORT=5000
 
-MONGO_URI=your_mongodb_uri
+MONGO_URI=your_mongodb_connection_string
 
-JWT_SECRET=your_secret
+JWT_SECRET=your_jwt_secret
 
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ---
 
-## Future Enhancements
+# 🎯 Use Cases
 
-- API Endpoint Explorer
-- Dependency Graph Visualization
-- Architecture Diagram Generator
-- AI Bug Detection
-- AI Documentation Generator
-- Multi-Language Support
-- Team Collaboration
+## 👨‍🎓 Students
 
----
+Learn and understand large projects quickly.
 
-## Use Cases
+## 👨‍💻 Developers
 
-### Students
+Analyze unfamiliar repositories efficiently.
 
-Understand large projects faster.
-
-### Developers
-
-Analyze unfamiliar repositories.
-
-### Interview Preparation
+## 🎤 Interview Preparation
 
 Explain project architecture confidently.
 
-### Teams
+## 🏢 Teams
 
-Onboard new developers quickly.
+Accelerate onboarding for new developers.
 
 ---
 
-## Author
+# 🚀 Future Roadmap
 
-### Akshay R
+- AI Documentation Generator
+- Dependency Graph Visualization
+- API Explorer
+- Architecture Diagram Generator
+- AI Bug Detection
+- Code Quality Insights
+- Multi-Language Support
+- Team Collaboration Features
 
-Full Stack Developer
+---
 
-Tech Stack:
+# 👨‍💻 Author
+
+## Akshay R
+
+Full Stack Developer | AI & ML Enthusiast
+
+### Skills
 
 - Java
 - Python
 - JavaScript
-- React
+- React.js
+- Next.js
 - Node.js
 - Express.js
 - MongoDB
 - MySQL
-- AI & Machine Learning
+- Machine Learning
+- Deep Learning
+
+### Connect
+
+- GitHub: https://github.com/Akshay001-A
+- LinkedIn: https://www.linkedin.com/in/akshayofficial0207
 
 ---
 
-## License
+# ⭐ Support
 
-MIT License
+If you found this project useful:
+
+⭐ Star the repository
+
+🍴 Fork the repository
+
+🛠 Contribute to the project
 
 ---
 
-⭐ If you like this project, give it a star on GitHub.
+# 📄 License
+
+Licensed under the MIT License.
+
+Made with ❤️ by Akshay R
