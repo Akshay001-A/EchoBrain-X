@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 export default function StatCard({
   title,
   value,
@@ -8,22 +10,28 @@ export default function StatCard({
   subtitle,
 }) {
   return (
-    <div
+    <motion.div
+      whileHover={{
+        y: -6,
+        scale: 1.02,
+      }}
+      transition={{
+        duration: 0.2,
+      }}
       style={{
         background: "white",
-        padding: "25px",
+        padding: "24px",
         borderRadius: "22px",
         boxShadow:
-          "0 10px 30px rgba(0,0,0,0.06)",
-        transition: "0.3s",
-        cursor: "pointer",
+          "0 8px 30px rgba(0,0,0,0.06)",
         border:
-          "1px solid rgba(0,0,0,0.05)",
+          "1px solid rgba(226,232,240,0.8)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Top Gradient Line */}
+      {/* Top Gradient Bar */}
+
       <div
         style={{
           position: "absolute",
@@ -38,67 +46,91 @@ export default function StatCard({
       />
 
       {/* Header */}
+
       <div
         style={{
           display: "flex",
           justifyContent:
             "space-between",
           alignItems: "center",
-          marginBottom: "20px",
+          marginBottom: "25px",
         }}
       >
-        <h4
-          style={{
-            margin: 0,
-            color: "#64748b",
-            fontSize: "15px",
-            fontWeight: "600",
-          }}
-        >
-          {title}
-        </h4>
+        <div>
+          <p
+            style={{
+              margin: 0,
+              color: "#64748b",
+              fontSize: "14px",
+              fontWeight: "600",
+            }}
+          >
+            {title}
+          </p>
+        </div>
 
         <div
           style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "14px",
+            width: "58px",
+            height: "58px",
+            borderRadius: "16px",
             background:
-              "#f1f5f9",
+              "linear-gradient(135deg,#eef2ff,#f8fafc)",
             display: "flex",
             justifyContent:
               "center",
             alignItems:
               "center",
-            fontSize: "24px",
+            fontSize: "28px",
+            boxShadow:
+              "0 4px 15px rgba(99,102,241,0.08)",
           }}
         >
           {icon}
         </div>
       </div>
 
-      {/* Value */}
+      {/* Number */}
+
       <h1
         style={{
           margin: 0,
-          fontSize: "38px",
-          fontWeight: "700",
+          fontSize: "44px",
+          fontWeight: "800",
           color: "#0f172a",
+          lineHeight: 1,
         }}
       >
         {value}
       </h1>
 
       {/* Subtitle */}
+
       <p
         style={{
-          marginTop: "10px",
+          marginTop: "12px",
           color: "#94a3b8",
           fontSize: "14px",
+          fontWeight: "500",
         }}
       >
         {subtitle}
       </p>
-    </div>
+
+      {/* Background Glow */}
+
+      <div
+        style={{
+          position: "absolute",
+          right: "-30px",
+          bottom: "-30px",
+          width: "120px",
+          height: "120px",
+          borderRadius: "50%",
+          background:
+            "rgba(99,102,241,0.05)",
+        }}
+      />
+    </motion.div>
   );
 }

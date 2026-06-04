@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
 import StatCard from "../../components/StatCard";
 
 export default function Dashboard() {
+    const router = useRouter();
+
     return (
         <div
             style={{
@@ -14,7 +17,8 @@ export default function Dashboard() {
                 minHeight: "100vh",
             }}
         >
-            {/* Full Width Topbar */} <Topbar />
+            {/* Topbar */}
+            <Topbar />
 
             <div
                 style={{
@@ -33,6 +37,7 @@ export default function Dashboard() {
                     }}
                 >
                     {/* Hero Section */}
+
                     <motion.div
                         initial={{
                             opacity: 0,
@@ -70,15 +75,18 @@ export default function Dashboard() {
                                 marginTop: "15px",
                                 fontSize: "18px",
                                 opacity: 0.95,
+                                maxWidth: "700px",
                             }}
                         >
                             AI-powered platform to search,
-                            understand, summarize and chat
-                            with any codebase.
+                            understand, summarize, generate
+                            embeddings and chat with any
+                            codebase instantly.
                         </p>
                     </motion.div>
 
-                    {/* Stats Cards */}
+                    {/* Statistics */}
+
                     <div
                         style={{
                             display: "grid",
@@ -114,10 +122,14 @@ export default function Dashboard() {
                     </div>
 
                     {/* Upload Section */}
+
                     <motion.div
                         whileHover={{
                             scale: 1.01,
                         }}
+                        transition={{
+                            duration: 0.2,
+                        }}
                         style={{
                             marginTop: "30px",
                             background: "white",
@@ -127,40 +139,72 @@ export default function Dashboard() {
                                 "0 10px 25px rgba(0,0,0,0.05)",
                         }}
                     >
-                        <h2>
-                            🚀 Upload New Project
-                        </h2>
-
-                        <p
+                        <div
                             style={{
-                                color: "#64748b",
-                                marginTop: "10px",
+                                display: "flex",
+                                justifyContent:
+                                    "space-between",
+                                alignItems: "center",
                             }}
                         >
-                            Upload a ZIP repository and let
-                            EchoBrain analyze your codebase.
-                        </p>
+                            <div>
+                                <h2
+                                    style={{
+                                        margin: 0,
+                                    }}
+                                >
+                                    🚀 Upload New Project
+                                </h2>
 
-                        <button
-                            style={{
-                                marginTop: "20px",
-                                background:
-                                    "linear-gradient(135deg,#4f46e5,#7c3aed)",
-                                color: "white",
-                                border: "none",
-                                padding: "14px 28px",
-                                borderRadius: "14px",
-                                cursor: "pointer",
-                                fontWeight: "700",
-                                fontSize: "15px",
-                            }}
-                        >
-                            Upload Project
-                        </button>
+                                <p
+                                    style={{
+                                        color: "#64748b",
+                                        marginTop: "10px",
+                                    }}
+                                >
+                                    Upload a ZIP repository and
+                                    let EchoBrain analyze your
+                                    codebase automatically.
+                                </p>
+                            </div>
+
+                            <button
+                                onClick={() =>
+                                    router.push("/upload")
+                                }
+                                style={{
+                                    background:
+                                        "linear-gradient(135deg,#4f46e5,#7c3aed)",
+                                    color: "white",
+                                    border: "none",
+                                    padding:
+                                        "14px 28px",
+                                    borderRadius:
+                                        "14px",
+                                    cursor:
+                                        "pointer",
+                                    fontWeight:
+                                        "700",
+                                    fontSize:
+                                        "15px",
+                                    boxShadow:
+                                        "0 10px 25px rgba(124,58,237,0.25)",
+                                }}
+                            >
+                                Upload Project
+                            </button>
+                        </div>
                     </motion.div>
 
                     {/* Recent Projects */}
-                    <div
+
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                        }}
+                        animate={{
+                            opacity: 1,
+                        }}
                         style={{
                             marginTop: "30px",
                             background: "white",
@@ -170,24 +214,65 @@ export default function Dashboard() {
                                 "0 10px 25px rgba(0,0,0,0.05)",
                         }}
                     >
-                        <h2>
+                        <h2
+                            style={{
+                                marginTop: 0,
+                            }}
+                        >
                             📌 Recent Projects
                         </h2>
 
                         <div
                             style={{
                                 textAlign: "center",
-                                padding: "40px",
+                                padding: "50px",
                                 color: "#64748b",
-                                fontSize: "18px",
                             }}
                         >
-                            No projects uploaded yet.
+                            <div
+                                style={{
+                                    fontSize: "60px",
+                                }}
+                            >
+                                📂
+                            </div>
+
+                            <h3>
+                                No Projects Uploaded Yet
+                            </h3>
+
+                            <p>
+                                Upload your first repository
+                                to start AI-powered code
+                                analysis.
+                            </p>
+
+                            <button
+                                onClick={() =>
+                                    router.push("/upload")
+                                }
+                                style={{
+                                    marginTop: "10px",
+                                    background:
+                                        "#4f46e5",
+                                    color: "white",
+                                    border: "none",
+                                    padding:
+                                        "12px 24px",
+                                    borderRadius:
+                                        "12px",
+                                    cursor:
+                                        "pointer",
+                                    fontWeight:
+                                        "600",
+                                }}
+                            >
+                                Upload Now
+                            </button>
                         </div>
-                    </div>
+                    </motion.div>
                 </main>
             </div>
         </div>
     );
-
 }

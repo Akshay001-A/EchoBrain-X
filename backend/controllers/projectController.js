@@ -124,7 +124,73 @@ const getProjectSnippets = async (req, res) => {
     }
 };
 
+
+
+const getProjects = async (req, res) => {
+    try {
+        const projects = await Project.find({
+            userId: req.user.id,
+        }).sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            totalProjects: projects.length,
+            projects,
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+};
+
+const deleteProject = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+
+        const project =
+            await Project.findOne({
+                _id: projectId,
+                userId: req.user.id,
+            });
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+        }
+
+        await Snippet.deleteMany({
+            projectId,
+        });
+
+        await Project.findByIdAndDelete(
+            projectId
+        );
+
+        res.status(200).json({
+            success: true,
+            message:
+                "Project deleted successfully",
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+};
+
 module.exports = {
     uploadProject,
     getProjectSnippets,
+    getProjects,
+    deleteProject,
 };

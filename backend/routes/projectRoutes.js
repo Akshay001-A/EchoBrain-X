@@ -8,6 +8,8 @@ const protect = require("../middleware/authMiddleware");
 const {
     uploadProject,
     getProjectSnippets,
+    getProjects,
+    deleteProject,
 } = require("../controllers/projectController");
 
 const storage = multer.diskStorage({
@@ -29,9 +31,21 @@ router.post(
 );
 
 router.get(
+    "/",
+    protect,
+    getProjects
+);
+
+router.get(
     "/:projectId/snippets",
     protect,
     getProjectSnippets
+);
+
+router.delete(
+    "/:projectId",
+    protect,
+    deleteProject
 );
 
 module.exports = router;
