@@ -24,6 +24,11 @@ const snippetSchema = new mongoose.Schema(
             default: "unknown",
         },
 
+        chunkIndex: {
+            type: Number,
+            required: true,
+        },
+
         code: {
             type: String,
             required: true,
