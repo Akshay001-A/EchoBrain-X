@@ -37,11 +37,7 @@ export default function Sidebar() {
       icon: "🔄",
       path: "/flow",
     },
-    {
-      name: "Settings",
-      icon: "⚙️",
-      path: "/settings",
-    },
+
   ];
 
   return (
