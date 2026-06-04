@@ -1,22 +1,43 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Topbar() {
+  const [mounted, setMounted] =
+    useState(false);
+
+  const [userName, setUserName] =
+    useState("");
+
+  useEffect(() => {
+    setMounted(true);
+
+    const userData =
+      JSON.parse(
+        localStorage.getItem("user") ||
+        "{}"
+      );
+
+    if (userData?.name) {
+      setUserName(
+        userData.name
+      );
+    }
+  }, []);
+
   const router = useRouter();
 
-  const user =
-    typeof window !== "undefined"
-      ? JSON.parse(
-        localStorage.getItem("user") || "{}"
-      )
-      : {};
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     router.push("/login");
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div
@@ -106,7 +127,7 @@ export default function Topbar() {
               fontSize: "20px",
             }}
           >
-            {user?.name || "User"}
+            {userName || "User"}
           </div>
         </div>
 
