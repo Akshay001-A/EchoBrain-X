@@ -17,6 +17,7 @@ const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const summaryRoutes = require("./routes/summaryRoutes");
 
 // Connect Database
 connectDB();
@@ -33,6 +34,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/summary", summaryRoutes);
 
 // Health Check
 app.get("/", (req, res) => {
