@@ -18,6 +18,8 @@ const projectRoutes = require("./routes/projectRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const summaryRoutes = require("./routes/summaryRoutes");
+const flowRoutes =
+  require("./routes/flowRoutes");
 
 // Connect Database
 connectDB();
@@ -35,6 +37,10 @@ app.use("/api/project", projectRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/summary", summaryRoutes);
+app.use(
+  "/api/flow",
+  flowRoutes
+);
 
 // Health Check
 app.get("/", (req, res) => {
