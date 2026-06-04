@@ -1,8 +1,8 @@
 const Project = require("../models/Project");
+const Snippet = require("../models/Snippet");
 
 const fs = require("fs");
-
-const Snippet = require("../models/Snippet");
+const path = require("path");
 
 const extractZip = require("../utils/extractZip");
 const readProjectFiles = require("../utils/readProjectFiles");
@@ -23,33 +23,32 @@ const uploadProject = async (req, res) => {
             originalFileName: req.file.originalname,
         });
 
-        const extractedPath = extractZip(
-            req.file.path
-        );
+        const extractedPath = extractZip(req.file.path);
 
-        const files =
-            readProjectFiles(extractedPath);
+        const files = readProjectFiles(extractedPath);
 
         let totalChunks = 0;
 
         for (const filePath of files) {
+
+            const relativePath = path.relative(
+                extractedPath,
+                filePath
+            );
+
             const content = fs.readFileSync(
                 filePath,
                 "utf8"
             );
 
-            const chunks =
-                chunkCode(content);
+            const chunks = chunkCode(content);
 
-            for (
-                let i = 0;
-                i < chunks.length;
-                i++
-            ) {
+            for (let i = 0; i < chunks.length; i++) {
+
                 await Snippet.create({
                     userId: req.user.id,
                     projectId: project._id,
-                    filePath,
+                    filePath: relativePath,
                     language: "unknown",
                     chunkIndex: i,
                     code: chunks[i],
@@ -61,12 +60,12 @@ const uploadProject = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message:
-                "Project indexed successfully",
+            message: "Project indexed successfully",
             totalFiles: files.length,
             totalChunks,
             project,
         });
+
     } catch (error) {
         console.error(error);
 
@@ -75,9 +74,6 @@ const uploadProject = async (req, res) => {
             message: "Server Error",
         });
     }
-
-
-
 };
 
 const getProjectSnippets = async (req, res) => {
@@ -94,6 +90,7 @@ const getProjectSnippets = async (req, res) => {
             totalSnippets: snippets.length,
             snippets,
         });
+
     } catch (error) {
         console.error(error);
 
@@ -103,7 +100,6 @@ const getProjectSnippets = async (req, res) => {
         });
     }
 };
-
 
 module.exports = {
     uploadProject,
