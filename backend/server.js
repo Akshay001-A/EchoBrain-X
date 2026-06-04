@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/project", projectRoutes);
 
 app.get("/", (req, res) => {
   res.send("EchoBrain Backend Running");
