@@ -27,6 +27,8 @@ export default function ViewerPage() {
 
     const [selectedFile, setSelectedFile] =
         useState("");
+    const [searchTerm, setSearchTerm] =
+        useState("");
 
     const [code, setCode] =
         useState("");
@@ -105,6 +107,15 @@ export default function ViewerPage() {
                 setLoading(false);
             }
         };
+
+    const filteredFiles =
+        files.filter((file) =>
+            file
+                .toLowerCase()
+                .includes(
+                    searchTerm.toLowerCase()
+                )
+        );
 
     return (
         <div
@@ -253,8 +264,27 @@ export default function ViewerPage() {
                             }}
                         >
                             <h3>
-                                📂 Files
+                                📂 Files ({filteredFiles.length})
                             </h3>
+                            <input
+                                type="text"
+                                placeholder="🔍 Search files..."
+                                value={searchTerm}
+                                onChange={(e) =>
+                                    setSearchTerm(
+                                        e.target.value
+                                    )
+                                }
+                                style={{
+                                    width: "100%",
+                                    padding: "12px",
+                                    borderRadius: "10px",
+                                    border:
+                                        "1px solid #dbeafe",
+                                    marginBottom: "15px",
+                                    outline: "none",
+                                }}
+                            />
 
                             {files.length ===
                                 0 ? (
@@ -262,7 +292,7 @@ export default function ViewerPage() {
                                     No files found
                                 </p>
                             ) : (
-                                files.map(
+                                filteredFiles.map(
                                     (
                                         file,
                                         index
@@ -330,6 +360,20 @@ export default function ViewerPage() {
                             <h3>
                                 💻 Source Code
                             </h3>
+
+                            <p
+                                style={{
+                                    color: "#64748b",
+                                    marginBottom: "15px",
+                                    fontSize: "14px",
+                                }}
+                            >
+                                {selectedFile
+                                    ? selectedFile
+                                        .split("\\")
+                                        .pop()
+                                    : "No file selected"}
+                            </p>
 
                             {loading ? (
                                 <p>
