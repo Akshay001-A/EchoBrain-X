@@ -80,8 +80,32 @@ const uploadProject = async (req, res) => {
 
 };
 
+const getProjectSnippets = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+
+        const snippets = await Snippet.find({
+            projectId,
+            userId: req.user.id,
+        });
+
+        res.status(200).json({
+            success: true,
+            totalSnippets: snippets.length,
+            snippets,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+};
 
 
 module.exports = {
     uploadProject,
+    getProjectSnippets,
 };
