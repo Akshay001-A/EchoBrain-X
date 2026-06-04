@@ -37,7 +37,11 @@ export default function Sidebar() {
       icon: "🔄",
       path: "/flow",
     },
-
+    {
+      name: "Code Viewer",
+      icon: "📄",
+      path: "/viewer",
+    }
   ];
 
   return (

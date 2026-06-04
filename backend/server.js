@@ -18,6 +18,8 @@ const projectRoutes = require("./routes/projectRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const summaryRoutes = require("./routes/summaryRoutes");
+const codeViewerRoutes =
+  require("./routes/codeViewerRoutes");
 const flowRoutes =
   require("./routes/flowRoutes");
 
@@ -40,6 +42,10 @@ app.use("/api/summary", summaryRoutes);
 app.use(
   "/api/flow",
   flowRoutes
+);
+app.use(
+  "/api/code-viewer",
+  codeViewerRoutes
 );
 
 // Health Check
