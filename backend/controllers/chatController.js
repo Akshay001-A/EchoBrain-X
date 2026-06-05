@@ -1,4 +1,5 @@
 const Snippet = require("../models/Snippet");
+const Chat = require("../models/Chat");
 
 const generateEmbedding = require("../utils/generateEmbedding");
 const cosineSimilarity = require("../utils/cosineSimilarity");
@@ -110,8 +111,26 @@ File C
 (Only if needed)
 `;
 
-        const answer =
-            await askGemini(prompt);
+        let answer = "";
+
+        try {
+            answer = await askGemini(prompt);
+        } catch (error) {
+            answer =
+                "Gemini is currently busy. Please try again later.";
+        }
+
+        if (
+            answer !==
+            "Gemini is currently busy. Please try again later."
+        ) {
+            await Chat.create({
+                userId: req.user.id,
+                projectId,
+                question,
+                answer,
+            });
+        }
 
         const path = require("path");
 
@@ -138,6 +157,28 @@ File C
     }
 };
 
+
+const getTotalChats = async (req, res) => {
+    try {
+        const totalChats = await Chat.countDocuments({
+            userId: req.user.id,
+        });
+
+        res.status(200).json({
+            success: true,
+            totalChats,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+};
+
 module.exports = {
     chatWithProject,
+    getTotalChats,
 };

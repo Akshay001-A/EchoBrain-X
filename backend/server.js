@@ -23,6 +23,9 @@ const codeViewerRoutes =
 const flowRoutes =
   require("./routes/flowRoutes");
 
+const dashboardRoutes =
+  require("./routes/dashboardRoutes");
+
 // Connect Database
 connectDB();
 
@@ -46,6 +49,11 @@ app.use(
 app.use(
   "/api/code-viewer",
   codeViewerRoutes
+);
+
+app.use(
+  "/api/dashboard",
+  dashboardRoutes
 );
 
 // Health Check

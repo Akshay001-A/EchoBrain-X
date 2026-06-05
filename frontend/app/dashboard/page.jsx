@@ -9,6 +9,10 @@ import {
     getProjectSnippets,
 } from "../../src/services/projectService";
 
+import {
+    getTotalChats,
+} from "../../src/services/chatService";
+
 import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
 import StatCard from "../../components/StatCard";
@@ -22,8 +26,12 @@ export default function Dashboard() {
     const [totalSnippets, setTotalSnippets] =
         useState(0);
 
+    const [totalChats, setTotalChats] =
+        useState(0);
+
     const [loading, setLoading] =
         useState(true);
+
 
     useEffect(() => {
         loadProjects();
@@ -39,6 +47,14 @@ export default function Dashboard() {
 
             setProjects(
                 projectList
+            );
+
+
+            const chatData =
+                await getTotalChats();
+
+            setTotalChats(
+                chatData.totalChats || 0
             );
 
             let snippetCount = 0;
@@ -177,7 +193,7 @@ export default function Dashboard() {
 
                         <StatCard
                             title="AI Chats"
-                            value="0"
+                            value={loading ? "..." : totalChats}
                             icon="🤖"
                             subtitle="Questions asked"
                             color="linear-gradient(90deg,#8b5cf6,#7c3aed)"

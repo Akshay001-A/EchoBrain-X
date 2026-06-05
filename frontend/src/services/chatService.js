@@ -27,3 +27,22 @@ export const askQuestion = async (
 
     return response.data;
 };
+
+export const getTotalChats =
+    async () => {
+        const token =
+            localStorage.getItem("token");
+
+        const response =
+            await axios.get(
+                `${API_URL}/count`,
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`,
+                    },
+                }
+            );
+
+        return response.data;
+    };
