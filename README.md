@@ -46,7 +46,7 @@ Upload repositories, analyze architecture, generate summaries, perform semantic 
 
 Instead of spending hours manually navigating through hundreds of files, developers can upload a repository and instantly gain deep insights through AI-driven analysis, semantic search, and intelligent code conversations.
 
-Whether you're onboarding to a new project, preparing for interviews, reviewing open-source repositories, or understanding legacy systems, EchoBrain X transforms complex codebases into clear, interactive knowledge.
+Whether you're onboarding to a new project, preparing for interviews, reviewing open-source repositories , EchoBrain X transforms complex codebases into clear, interactive knowledge.
 
 ### 🎯 What EchoBrain X Provides
 
