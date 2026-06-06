@@ -2,7 +2,7 @@
 import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import {
     getProjects,
@@ -104,6 +104,12 @@ export default function ChatPage() {
     useEffect(() => {
         loadProjects();
     }, []);
+
+    // Auto-scroll to bottom on new messages
+    const messagesEndRef = useRef(null);
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const loadProjects = async () => {
         try {
@@ -245,9 +251,6 @@ export default function ChatPage() {
                             borderRadius: "24px",
                             display: "flex",
                             flexDirection: "column",
-                            height: "60vh",
-                            boxShadow:
-                                "0 10px 25px rgba(0,0,0,0.05)",
                         }}
                     >
                         {/* Messages */}
@@ -255,7 +258,6 @@ export default function ChatPage() {
                         <div
                             style={{
                                 flex: 1,
-                                overflowY: "auto",
                                 padding: "25px",
                             }}
                         >
@@ -316,6 +318,7 @@ export default function ChatPage() {
                                     🤖 Thinking...
                                 </div>
                             )}
+                            <div ref={messagesEndRef} />
                         </div>
 
                         {/* Input */}
