@@ -9,6 +9,10 @@ const {
     getTotalChats,
 } = require("../controllers/chatController");
 
+const {
+    getChatHistory,
+} = require("../controllers/chatHistoryController");
+
 router.post(
     "/",
     protect,
@@ -21,4 +25,10 @@ router.get(
     getTotalChats
 );
 
+
+router.get(
+    "/history/:projectId",
+    protect,
+    getChatHistory
+);
 module.exports = router;

@@ -8,8 +8,10 @@ import {
     getProjects,
 } from "../../src/services/projectService";
 
+
 import {
     askQuestion,
+    getChatHistory,
 } from "../../src/services/chatService";
 
 import { motion } from "framer-motion";
@@ -38,6 +40,12 @@ export default function ChatPage() {
 
     const [selectedProject, setSelectedProject] =
         useState("");
+
+    const [history, setHistory] =
+    useState([]);
+
+    const [showHistory, setShowHistory] =
+    useState(false);
 
     const handleSend = async () => {
         if (!question.trim()) return;
@@ -98,6 +106,31 @@ export default function ChatPage() {
         }
     };
 
+
+    const loadHistory =
+    async () => {
+
+        if (showHistory) {
+            setShowHistory(false);
+            return;
+        }
+
+        try {
+            const data =
+                await getChatHistory(
+                    selectedProject
+                );
+
+            setHistory(
+                data.chats || []
+            );
+
+            setShowHistory(true);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
 
@@ -241,7 +274,116 @@ export default function ChatPage() {
                                 )
                             )}
                         </select>
+                       
+
+                       <button
+    onClick={loadHistory}
+    style={{
+        background:
+            "rgba(255,255,255,0.2)",
+        color: "white",
+        border:
+            "1px solid rgba(255,255,255,0.3)",
+        padding: "12px 18px",
+        borderRadius: "12px",
+        cursor: "pointer",
+        fontWeight: "600",
+        marginTop: "15px",
+    }}
+>
+    {
+    showHistory
+        ? "❌ Close History"
+        : "📜 Chat History"
+}
+</button>
+
                     </div>
+                       
+                    {/* Chat History */}
+
+                    {
+    showHistory && (
+        <div
+            style={{
+                background: "white",
+                borderRadius: "20px",
+                padding: "20px",
+                marginBottom: "20px",
+                boxShadow:
+                    "0 10px 25px rgba(0,0,0,0.05)",
+                maxHeight: "400px",
+                overflowY: "auto",
+            }}
+        >
+            <h3
+                style={{
+                    marginTop: 0,
+                }}
+            >
+                📜 Chat History
+            </h3>
+
+            {history.length === 0 ? (
+                <p>
+                    No chat history found.
+                </p>
+            ) : (
+                history.map((chat) => (
+                    <div
+                        key={chat._id}
+                        style={{
+                            padding: "15px",
+                            marginBottom: "15px",
+                            background:
+                                "#f8fafc",
+                            borderRadius:
+                                "12px",
+                            border:
+                                "1px solid #e2e8f0",
+                        }}
+                    >
+                        <div
+                            style={{
+                                fontWeight:
+                                    "600",
+                                marginBottom:
+                                    "8px",
+                            }}
+                        >
+                            ❓ {chat.question}
+                        </div>
+
+                        <div
+                            style={{
+                                color:
+                                    "#334155",
+                            }}
+                        >
+                            🤖 {chat.answer}
+                        </div>
+
+                        <div
+                            style={{
+                                marginTop:
+                                    "10px",
+                                fontSize:
+                                    "12px",
+                                color:
+                                    "#64748b",
+                            }}
+                        >
+                            🕒{" "}
+                            {new Date(
+                                chat.createdAt
+                            ).toLocaleString()}
+                        </div>
+                    </div>
+                ))
+            )}
+        </div>
+    )
+}
 
                     {/* Chat Container */}
 

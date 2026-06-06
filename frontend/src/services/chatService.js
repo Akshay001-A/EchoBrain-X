@@ -46,3 +46,23 @@ export const getTotalChats =
 
         return response.data;
     };
+
+
+export const getChatHistory =
+    async (projectId) => {
+        const token =
+            localStorage.getItem("token");
+
+        const response =
+            await axios.get(
+                `${API_URL}/history/${projectId}`,
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`,
+                    },
+                }
+            );
+
+        return response.data;
+    };    
