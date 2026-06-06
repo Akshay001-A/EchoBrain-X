@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import { useRef } from "react";
 
 import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
@@ -23,6 +26,8 @@ export default function SummaryPage() {
 
     const [summary, setSummary] =
         useState("");
+
+     const summaryRef = useRef(null);   
 
     const [loading,
         setLoading] =
@@ -88,6 +93,53 @@ export default function SummaryPage() {
                 setLoading(false);
             }
         };
+
+
+          const downloadPDF = async () => {
+
+    if (!summaryRef.current) return;
+
+    const canvas =
+        await html2canvas(
+            summaryRef.current,
+            {
+                scale: 5,
+            }
+        );
+
+    const imgData =
+        canvas.toDataURL(
+            "image/png"
+        );
+
+    const pdf =
+        new jsPDF(
+            "p",
+            "mm",
+            "a4"
+        );
+
+    const pdfWidth =
+        pdf.internal.pageSize.getWidth();
+
+    const pdfHeight =
+        (canvas.height *
+            pdfWidth) /
+        canvas.width;
+
+    pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdfWidth,
+        pdfHeight
+    );
+
+    pdf.save(
+        "EchoBrainX-Summary.pdf"
+    );
+};
 
     return (
         <div
@@ -211,47 +263,73 @@ export default function SummaryPage() {
                             )}
                         </select>
 
-                        <button
-                            onClick={
-                                generateSummary
-                            }
-                            style={{
-                                background:
-                                    "linear-gradient(135deg,#4f46e5,#7c3aed)",
-                                color:
-                                    "white",
-                                border:
-                                    "none",
-                                padding:
-                                    "14px 24px",
-                                borderRadius:
-                                    "12px",
-                                cursor:
-                                    "pointer",
-                                fontWeight:
-                                    "700",
-                            }}
-                        >
-                            Generate
-                        </button>
+                       <div
+    style={{
+        display: "flex",
+        gap: "10px",
+    }}
+>
+    <button
+        onClick={generateSummary}
+        style={{
+            background:
+                "linear-gradient(135deg,#4f46e5,#7c3aed)",
+            color: "white",
+            border: "none",
+            padding: "14px 24px",
+            borderRadius: "12px",
+            cursor: "pointer",
+            fontWeight: "700",
+        }}
+    >
+        Generate
+    </button>
+
+    {summary && (
+        <button
+            onClick={downloadPDF}
+            style={{
+                background:
+                    "#10b981",
+                color: "white",
+                border: "none",
+                padding:
+                    "14px 24px",
+                borderRadius:
+                    "12px",
+                cursor:
+                    "pointer",
+                fontWeight:
+                    "700",
+            }}
+        >
+            📄 Download PDF
+        </button>
+    )}
+</div>
                     </div>
+                     
+
+
+                      
 
                     {/* Summary */}
 
                     <div
-                        style={{
-                            background:
-                                "white",
-                            borderRadius:
-                                "24px",
-                            padding:
-                                "30px",
-                            minHeight:
-                                "600px",
-                            boxShadow:
-                                "0 10px 25px rgba(0,0,0,0.05)",
-                        }}
-                    >
+    ref={summaryRef}
+    style={{
+        background:
+            "white",
+        borderRadius:
+            "24px",
+        padding:
+            "30px",
+        minHeight:
+            "600px",
+        boxShadow:
+            "0 10px 25px rgba(0,0,0,0.05)",
+    }}
+>
                         {loading ? (
                             <h3>
                                 🤖 Generating
