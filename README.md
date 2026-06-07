@@ -453,7 +453,6 @@ Accelerate onboarding for new developers.
 - AI Bug Detection
 - Code Quality Insights
 - Multi-Language Support
-- Team Collaboration Features
 
 ---
 # 👨‍💻 Developer
