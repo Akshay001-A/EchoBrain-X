@@ -340,8 +340,8 @@ EchoBrain
 │   ├── app
 │   ├── components
 │   ├── services
-│   ├── hooks
 │   └── public
+│  
 │
 ├── backend
 │   ├── controllers
